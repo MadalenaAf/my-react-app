@@ -7,6 +7,17 @@ function App() {
     <div className="App">
       <div className="container">
         <Weather />
+        <footer className="bottom-github">
+          <small>
+            <a
+              href="https://github.com/MadalenaAf/SheCodesPlus-WeatherApp"
+              target="_blank"
+            >
+              Open source code{" "}
+            </a>
+            , by Madalena Ferreira
+          </small>
+        </footer>
       </div>
     </div>
   );
