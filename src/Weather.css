@@ -52,8 +52,6 @@
   left: 1px;
 }
 
-.weather .image {
-  color: #f1ae3a;
-  font-size: 500%;
+.weather canvas {
   margin-left: 10px;
 }
