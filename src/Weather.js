@@ -3,7 +3,7 @@ import "./Weather.css";
 import axios from "axios";
 import FormattedDate from "./FormattedDate";
 
-export default function CurrentWeather() {
+export default function CurrentWeather(props) {
   const [ready, setReady] = useState(false);
   const [weatherData, setWeatherData] = useState({});
 
@@ -38,7 +38,7 @@ export default function CurrentWeather() {
         </div>
         <div className="row current-weather">
           <div className="col-6 city-description">
-            <h1> Lisbon </h1>
+            <h1> {props.defaultCity} </h1>
             <ul>
               <li>
                 Last updated: <FormattedDate date={weatherData.date} />{" "}
@@ -63,8 +63,7 @@ export default function CurrentWeather() {
     );
   } else {
     const apiKey = "ab89347cacce1a19cd08ea5cb4878ce1";
-    let city = "Roma";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
     return <div>Loading...</div>;
   }
