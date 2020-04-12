@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "./Weather.css";
 import axios from "axios";
-import FormattedDate from "./FormattedDate";
+import WeatherInfo from "./WeatherInfo";
 
 export default function CurrentWeather(props) {
   const [ready, setReady] = useState(false);
   const [weatherData, setWeatherData] = useState({});
+  const [city, setCity] = useState(props.defaultCity);
 
   function handleResponse(response) {
     setWeatherData({
@@ -36,34 +37,12 @@ export default function CurrentWeather(props) {
             <input type="Submit" id="search-button" value="Search"></input>
           </form>
         </div>
-        <div className="row current-weather">
-          <div className="col-6 city-description">
-            <h1> {props.defaultCity} </h1>
-            <ul>
-              <li>
-                Last updated: <FormattedDate date={weatherData.date} />{" "}
-              </li>
-              <li>{weatherData.description}</li>
-              <li>Humidity: {weatherData.humidity}%</li>
-              <li>Wind: {Math.round(weatherData.wind)} km/h</li>
-            </ul>
-          </div>
-          <div className="col-6 image-temperature">
-            <span className="temperature">
-              {Math.round(weatherData.temperature)}{" "}
-            </span>{" "}
-            <span className="units"> ºC | ºF </span>{" "}
-            <span className="image">
-              {" "}
-              <img src={weatherData.iconUrl} alt={weatherData.description} />
-            </span>
-          </div>
-        </div>
+        <WeatherInfo data={weatherData} />
       </div>
     );
   } else {
     const apiKey = "ab89347cacce1a19cd08ea5cb4878ce1";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
     return <div>Loading...</div>;
   }
