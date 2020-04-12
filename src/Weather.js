@@ -21,10 +21,25 @@ export default function CurrentWeather(props) {
     setReady(true);
   }
 
+  function search() {
+    const apiKey = "ab89347cacce1a19cd08ea5cb4878ce1";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function handleCityChange(event) {
+    setCity(event.target.value);
+  }
+
   if (ready) {
     return (
       <div className="weather">
-        <div className="form">
+        <div className="form" onSubmit={handleSubmit}>
           <form className="form-inline">
             <label for="City">City: </label>
             <input
@@ -33,6 +48,7 @@ export default function CurrentWeather(props) {
               placeholder="Type a city..."
               autoComplete="off"
               className="form-control"
+              onChange={handleCityChange}
             ></input>
             <input type="Submit" id="search-button" value="Search"></input>
           </form>
@@ -41,9 +57,7 @@ export default function CurrentWeather(props) {
       </div>
     );
   } else {
-    const apiKey = "ab89347cacce1a19cd08ea5cb4878ce1";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(handleResponse);
+    search();
     return <div>Loading...</div>;
   }
 }
