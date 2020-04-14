@@ -11,7 +11,7 @@ export default function WeatherInfo(props) {
           <h1> {props.data.city} </h1>
           <ul>
             <li>
-              Last updated: <FormattedDate date={props.data.date} />{" "}
+              <FormattedDate date={props.data.date} />{" "}
             </li>
             <li>{props.data.description}</li>
             <li>Humidity: {props.data.humidity}%</li>
