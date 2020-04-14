@@ -10,7 +10,7 @@ function App() {
         <footer className="bottom-github">
           <small>
             <a
-              href="https://github.com/MadalenaAf/SheCodesPlus-WeatherApp"
+              href="https://github.com/MadalenaAf/my-react-app"
               target="_blank"
             >
               Open source code{" "}
